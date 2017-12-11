@@ -1,44 +1,36 @@
 # Docker-Compose Ontology
 
-This ontology describes how a docker-compose file relates to images and how it manages [docker containers](https://git.tenforce.com/Jonathan.Langens/vocabs/blob/master/docker.md) which are instantiations of thoses images.
-
-![alt-text](https://raw.githubusercontent.com/langens-jonathan/diagrams/master/DockerComposeVocab.png, "Docker-Compose Vocabulary")
-
-## Prefixes
-* drc: `<https://w3.org/ns/bde/docker-compose#>`
-* docker: `<https://w3.org/ns/bde/docker#>`
-
 ## Classes
-* [DockerComposeFile](#DockerComposeFile)
-* [Service](#Service)
+[BuildConfig](#BuildConfig)
+[DockerComposition](#DockerComposition)
+[Service](#Service)
 
 ## Properties
 
-# Classes
+## Relations
 
-<a name="DockerComposeFile"> </a>
-## DockerComposeFile
+# Classes
+<a name="BuildConfig"></a>
+## BuildConfig
+
 #### Description
-A Compose File is a file written with a specific docker-compose version in mind, expressed in YAML that describes a composition of dockers and how they relate to each other.
 
 #### Equivalent
 none
 
 #### Properties
-| Predicate                                                       | rdfs:subClassOf | Docker Inspect Value   | Type           | Arity |
-| :---:                                                           | :---:           | :---:                  | :---:          | :---: |
-| [docker](#docker):[blkioWeight](#blkioWeight)                   |                 | "BlkioWeight"          | literal:number |       |
-| [docker](#docker):[blkioWeightDevice](#blkioWeightDevice)       |                 | "BlkioWeightDevice"    | literal:string |       |
-| [docker](#docker):[blkioDeviceReadBps](#blkioDeviceReadBps)     |                 | "BlkioDeviceReadBps"   | literal:string |       |
-| [docker](#docker):[blkioDeviceWriteBps](#blkioDeviceWriteBps)   |                 | "BlkioDeviceWriteBps"  | literal:string |       |
-| [docker](#docker):[blkioDeviceReadIOps](#blkioDeviceReadIOps)   |                 | "BlkioDeviceReadIOps"  | literal:string |       |
-| [docker](#docker):[blkioDeviceWriteIOps](#blkioDeviceWriteIOps) |                 | "BlkioDeviceWriteIOps" | literal:string |       |
-| [dco](#dco):                                                    |                 |                        |                |       |
+| Predicate                             | OWL:sameAs       | Docker-Compose-File      | Type                   |   Arity |
+| :---------------------------          | :--------------: | :----------------------: | :--------------------: | :-----: |
+| [drc](#drc):[context](#context)       |                  | context                  | literal:string         |     1-1 |
+| [drc](#drc):[dockerfile](#dockerfile) |                  | dockerfile               | literal:string         |     1-1 |
+| [drc](#drc):[args](#args)             |                  | args                     | literal:string         |     1-1 |
+| [drc](#drc):[labels](#labels)         |                  | labels                   | literal:string         |     1-1 |
+| [drc](#drc):[network](#network)       |                  | network                  | literal:string         |     1-1 |
+| [drc](#drc):[target](#target)         |                  | target                   | literal:string         |     1-1 |
 
 #### Relations
 
 ##### Domain of
-[docker:hasBlockIO](#docker:hasBlockIO)
 
 ##### Range of 
 
@@ -48,139 +40,57 @@ none
 
 ---
 
+<a name="DockerComposition"></a>
+## DockerComposition
 
-## DockerComposeFile <a name="DockerComposeFile"> </a>
+#### Description
 
-### Definition
-A Compose File is a file written with a specific docker-compose version in mind, expressed in YAML that describes a composition of dockers and how they relate to each other.
-
-### Equivalent
+#### Equivalent
 none
 
-### Properties
-* drc:version
-* drc:logDefinition
+#### Properties
+| Predicate                             | OWL:sameAs       | Docker-Compose-File      | Type                   |   Arity |
+| :---------------------------          | :--------------: | :----------------------: | :--------------------: | :-----: |
+| [dco](#dco):[version](#version)       |                  | version                  | literal:string         |     1-1 |
+| [dco](#dco):[File](#File)             |                  | File                     | literal:string         |     1-1 |
+| [dco](#dco):[Service](#Service)       |                  | Service                  | literal:string         |     1-1 |
+| [dco](#dco):[hasService](#hasService) |                  | hasService               | literal:string         |     1-1 |
+| [dct](#dct):[title](#title)           |                  | title                    | literal:string         |     1-1 |
 
-### Relations
 
-### Domain of
+#### Relations
 
-### Range of
+##### Domain of
 
-### Example
+##### Range of 
+
+#### Example
 ```
-<drc:ComposeFile rdf:ID="drc">
-  <drc:verion>2.0</drc:version>
-</drc:ComposeFile>
 ```
 
 ---
 
-## ContainerDefinition <a name="ContainerDefinition"> </a>
+<a name="Service"></a>
+## Service
 
-### Definition
-Describes a container within the context of a docker-compose.yml file. This generally is one top level block in the YML.
+#### Description
 
-### Equivalent
+#### Equivalent
 none
 
-### Properties
-* drc:name
+#### Properties
+| Predicate                             | OWL:sameAs       | Docker-Compose-File      | Type                   |   Arity |
+| :---------------------------          | :--------------: | :----------------------: | :--------------------: | :-----: |
 
-### Domain of
 
-### Range of
+#### Relations
 
-### Example
-```
-<drc:ContainerDefinition rdf:ID="cd">
-  <drc:name>db</drc:name>
-</drc:ContainerDefinition>
-```
+##### Domain of
 
----
+##### Range of 
 
-# Properties
-
-## containerDefinition <a name="containerDefinition"> </a>
-The definition of a specific container in a docker compose file
-
-### Domain
-
-### Range
-
-### Example
+#### Example
 ```
 ```
 
 ---
-
-## instance <a name="instance"> </a>
-
-### Domain
-
-### Range
-
-### Example
-```
-```
-
----
-
-## instanceOf <a name="instanceOf"> </a>
-
-### Domain
-
-### Range
-
-### Example
-```
-```
-
----
-
-## logDefinition <a name="logDefinition"> </a>
-
-### Domain
-
-### Range
-
-### Example
-```
-```
-
----
-
-## name <a name="name"> </a>
-
-### Domain
-
-### Range
-
-### Example
-```
-```
-
----
-
-## version <a name="version"> </a>
-
-### Domain
-
-### Range
-
-### Example
-```
-```
-
----
-
-## volumes <a name="volumes"> </a>
-
-### Domain
-
-### Range
-
-### Example
-```
-```
